@@ -1,0 +1,45 @@
+{% load static %} {% block body %}
+
+<div class="bg-light py-3 mt-5">
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-md-12 d-flex justify-content-between align-items-center"
+			>
+				<h6 class="mb-0">
+					&copy; Copyright all right reserved by
+					<a href="{% url 'index'%}"
+						><strong>Syntax terminators.</strong></a
+					>
+				</h6>
+				<form
+					class="row row-cols-lg-auto align-items-center mb-0"
+					method="POST"
+				>
+					{% csrf_token %}
+					<div class="col-12">
+						<div class="input-group">
+							<label class="col-sm-12" for="email"
+								><h4>NewsLetter</h4></label
+							>
+							<div class="input-group-text">Enter Email :</div>
+							<input
+								type="email"
+								name="email"
+								class="form-control"
+								id="email"
+								placeholder="example@gmail.com"
+							/>
+							<button type="submit" class="btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</div>
+					<div class="col-12"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock%}

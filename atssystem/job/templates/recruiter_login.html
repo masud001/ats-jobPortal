@@ -1,0 +1,93 @@
+{% load static %} {% block body %} {% include 'navigation.html' %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<marquee
+				style="color: wheat"
+				behavior=""
+				direction=""
+				class="bg-primary py-3 text-uppercase my-2"
+			>
+				<h1>Recruiter login</h1>
+			</marquee>
+		</div>
+	</div>
+</div>
+
+<!-- admin form section start -->
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8 bg-light pt-5 my-5 pb-4">
+			<form method="post">
+				{% csrf_token %}
+				<div class="row mb-3">
+					<label for="email" class="col-sm-2 col-form-label"
+						>Email</label
+					>
+					<div class="col-sm-10">
+						<input
+							type="email"
+							name="hremail"
+							class="form-control"
+							id="email"
+							placeholder="example@gmail.com"
+						/>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="inputPassword3" class="col-sm-2 col-form-label"
+						>Password</label
+					>
+					<div class="col-sm-10">
+						<input
+							type="password"
+							name="pwd"
+							class="form-control"
+							id="password"
+							placeholder="Password"
+						/>
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary offset-md-2">
+					Log in
+				</button>
+				<p class="mt-3 offset-md-2 text-capitalize">
+					<span class="text-dark">if you have no account please</span>
+					<a href="{% url 'recuiter_signup' %}"
+						><strong>Register</strong></a
+					>
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- admin form section end -->
+{% include 'footer.html' %}
+
+<!-- if no error then, "no"   -->
+
+{% ifequal error "no" %}
+<script>
+	alert("login  Successful!");
+	window.location = '{% url "recruiter_home"  %}';
+</script>
+{% endifequal %}
+<!-- end  -->
+<!-- if have error then, "yes"   -->
+{% ifequal error "yes" %}
+<script>
+	alert("invalid login for Recruiter. try again !");
+</script>
+{% endifequal %}
+<!-- end  -->
+<!-- if status pending then, "not"   -->
+{% ifequal error "not" %}
+<script>
+	alert("your status is pending. !");
+</script>
+{% endifequal %}
+<!-- end  -->
+
+{% endblock%}

@@ -1,0 +1,240 @@
+{% load static %} {% block body %} {% include 'navigation.html' %}
+
+<script>
+	// check confirm password
+	function checkPassword() {
+		let pass = document.signup.password.value;
+		let cpass = document.signup.confirmPassword.value;
+
+		if (pass != cpass) {
+			console.log(`pass: ${pass} and cpass : ${cpass} not same!!`);
+
+			document.getElementById("errorConfirmPass").innerHTML =
+				"Please Confirm right Password!";
+			document.signup.confirmPassword.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<marquee
+				behavior=""
+				direction=""
+				class="bg-primary py-3 text-white text-uppercase my-2"
+			>
+				<h1>User SignUp</h1>
+			</marquee>
+		</div>
+	</div>
+</div>
+
+<!-- admin form section start -->
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-7 bg-light pt-4 px-4 my-5 pb-4">
+			<form
+				method="post"
+				onsubmit="return checkPassword()"
+				name="signup"
+				enctype="multipart/form-data"
+			>
+				{% csrf_token %}
+
+				<!-- first name last name form  -->
+				<div class="form-group mb-3">
+					<div class="row g-3">
+						<div class="col">
+							<label for="firstname">First Name</label>
+							<input
+								type="text"
+								id="firstname"
+								name="fname"
+								class="form-control"
+								placeholder="First Name"
+								aria-label="First name"
+								required
+							/>
+						</div>
+						<div class="col">
+							<label for="lastname">Last Name</label>
+							<input
+								type="text"
+								id="lastname"
+								name="lname"
+								class="form-control"
+								placeholder="Last Name"
+								aria-label="Last name"
+								required
+							/>
+						</div>
+					</div>
+				</div>
+				<!-- contact number form  -->
+				<div class="form-group mb-3">
+					<div class="row g-3">
+						<div class="col">
+							<label for="contact">Contact Number</label>
+							<input
+								type="text"
+								id="contact"
+								name="contact"
+								class="form-control"
+								placeholder="Enter Contact number"
+								aria-label="Enter Contact number"
+								required
+							/>
+						</div>
+					</div>
+				</div>
+				<!-- Email address form  -->
+				<div class="form-group mb-3">
+					<div class="row g-3">
+						<div class="col">
+							<label for="Email">Email</label>
+							<input
+								type="email"
+								id="Email"
+								name="email"
+								class="form-control"
+								placeholder="example@gamil.com"
+								aria-label="example@gamil.com"
+								required
+							/>
+						</div>
+					</div>
+				</div>
+				<!-- upload avater image form   -->
+				<div class="form-group mb-3">
+					<div class="row">
+						<div class="col">
+							<label for="formFile" class="form-label"
+								>Upload Avater Image</label
+							>
+							<input
+								class="form-control"
+								type="file"
+								name="image"
+								id="formFile"
+								required
+							/>
+						</div>
+					</div>
+				</div>
+				<!-- password forms  -->
+				<div class="form-group mb-3">
+					<div class="row g-3">
+						<div class="col">
+							<label for="password">Password</label>
+							<input
+								type="password"
+								id="password"
+								name="pwd"
+								class="form-control"
+								placeholder="Enter Password"
+								aria-label="Enter Password"
+								required
+							/>
+							<div id="errorPass" class="text-danger"></div>
+						</div>
+						<div class="col">
+							<label for="cpassword">Confirm Password</label>
+							<input
+								type="password"
+								id="cpassword"
+								name="confirmPassword"
+								class="form-control"
+								placeholder="Enter confirm Password"
+								aria-label="Enter confirm Password"
+								required
+							/>
+							<div
+								id="errorConfirmPass"
+								class="text-danger"
+							></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- gender selection forms  -->
+				<div class="form-group mb-3">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input
+									class="form-check-input"
+									type="radio"
+									name="gender"
+									id="Male"
+									value="Male"
+								/>
+								<label class="form-check-label" for="Male">
+									Male
+								</label>
+							</div>
+							<div class="form-check">
+								<input
+									class="form-check-input"
+									type="radio"
+									name="gender"
+									id="Female"
+									value="Female"
+								/>
+								<label class="form-check-label" for="Female">
+									Female
+								</label>
+							</div>
+							<div class="form-check">
+								<input
+									class="form-check-input"
+									type="radio"
+									name="gender"
+									id="Others"
+									value="Others"
+								/>
+								<label class="form-check-label" for="Others">
+									Others
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary text-capitalize">
+					sign up
+				</button>
+				<p class="mt-5 text-capitalize">
+					<span class="text-dark"
+						>if you already have an account please</span
+					>
+					<a href="{% url 'user_login' %}"><strong>login</strong></a>
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- admin form section end -->
+{% include 'footer.html' %}
+
+<!-- condition check to submit form and redirect  -->
+
+<!-- if not ok then run  -->
+
+{% ifequal error "no" %}
+<script>
+	alert("Sign up Successful!");
+	window.location = '{% url "user_login"  %}';
+</script>
+{% endifequal %}
+<!-- end  -->
+
+{% ifequal error "yes" %}
+<script>
+	alert("something went Wrong. Please TRY again !");
+</script>
+{% endifequal %}
+<!-- end  -->
+
+{% endblock%}

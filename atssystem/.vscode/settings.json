@@ -1,0 +1,7 @@
+{
+    "emmet.showSuggestionsAsSnippets": true,
+    "autoimport.showNotifications": true,
+    "importCost.debug": true,
+    "path-intellisense.autoSlashAfterDirectory": true,
+    "python.pythonPath": "C:\\Users\\Masudur Rahman\\envs\\ats\\Scripts\\python.exe",
+}
